@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         path: "app",
         element: <Layout />,
         children: [
-          { path: "dashboard", element: <Dashboard /> },
+          { index: true, element: <Dashboard /> },
           { path: "resume-builder/:resumeID", element: <ResumeBuilder /> },
         ],
       },

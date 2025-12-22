@@ -1,9 +1,13 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const Layout = () => {
   return (
     <div>
-        layout
+        <h1>LayOUT</h1>
+        <div>
+          <Outlet/>
+        </div>
       
     </div>
   )
