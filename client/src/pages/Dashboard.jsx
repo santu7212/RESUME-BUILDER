@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Dashbord = () => {
+const Dashboard = () => {
   return (
     <div>
         dashbord
@@ -9,4 +9,4 @@ const Dashbord = () => {
   )
 }
 
-export default Dashbord
+export default Dashboard

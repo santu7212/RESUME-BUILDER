@@ -1,11 +1,12 @@
-import React from 'react'
+ import { Outlet } from "react-router-dom";
 
 const Home = () => {
   return (
     <div>
-      Home
+      {/* NAV / HEADER */}
+      <Outlet /> 
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
