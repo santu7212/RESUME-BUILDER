@@ -63,7 +63,7 @@ const Footer = () => {
              
           </a>
           <div>
-            <p className="text-slate-100 font-semibold">Product</p>
+            <p className="text-slate-800 font-semibold">Product</p>
             <ul className="mt-2 space-y-2">
               <li>
                 <a href="/" className="hover:text-indigo-600 transition">
@@ -88,7 +88,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <p className="text-slate-100 font-semibold">Resources</p>
+            <p className="text-slate-800 font-semibold">Resources</p>
             <ul className="mt-2 space-y-2">
               <li>
                 <a href="/" className="hover:text-indigo-600 transition">
