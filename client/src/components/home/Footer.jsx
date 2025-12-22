@@ -230,7 +230,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="mt-3 text-center">
-            © 2025 <a href="https://prebuiltui.com">PrebuiltUI</a>
+            © 2025 <a href="https://prebuiltui.com">ResumAI</a>
           </p>
         </div>
       </footer>
