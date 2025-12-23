@@ -22,7 +22,7 @@ const Login = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-grey-50">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <form
         onSubmit={handleSubmit}
         className="sm:w-[350px] w-full text-center border border-gray-300/60 rounded-2xl px-8 bg-white"
