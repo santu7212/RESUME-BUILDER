@@ -3,6 +3,7 @@ import {
   PencilIcon,
   PlusIcon,
   Trash,
+  UploadCloud,
   UploadCloudIcon,
   X,
 } from "lucide-react";
@@ -31,6 +32,11 @@ const Dashboard = () => {
     navigate(`/app/resume-builder/res123`)
 
 
+  }
+  const uploadResume=async(event)=>{
+    event.preventDefault();
+    setShowUploadResume(false);
+    navigate(`/app/resume-builder/res123`)
   }
   useEffect(() => {
     loadAllResume();
@@ -80,7 +86,7 @@ const Dashboard = () => {
           </button>
 
           {/* Upload Resume */}
-          <button
+          <button onClick={()=>setShowUploadResume(true)}
             className="
               w-full sm:max-w-36 h-48
               flex flex-col items-center justify-center
@@ -180,8 +186,9 @@ cursor-pointer
           bg-opacity-50 z-10 flex items-center justify-center" action="">
             <div onClick={e=>e.stopPropagation()} className="relative bg-slate-50 border shadow-md rounded-lg w-full
             max-w-sm p-6">
-              <h2 className="text-xl font-bold mb-4">Create a Resume</h2>
-              <input type="text" placeholder="Enter resume title"  className="w-full px-4
+              <h2  className="text-xl font-bold mb-4">Create a Resume</h2>
+              <input  onChange={(e)=>setTitle(e.target.value)}
+               value={title} type="text" placeholder="Enter resume title"  className="w-full px-4
                py-2 mb-4 focus:border-blue-600 ring-blue-600 " required/>
                <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ">Create Resume</button>
                <X className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 
@@ -190,6 +197,49 @@ cursor-pointer
 
           </form>
         )}
+        {
+          showUploadResume&&(
+             <form onSubmit={uploadResume} onClick={()=>setShowUploadResume(false)} className="fixed inset-0 bg-black-70 backdrop-blur 
+          bg-opacity-50 z-10 flex items-center justify-center" action="">
+            <div onClick={e=>e.stopPropagation()} className="relative bg-slate-50 border shadow-md rounded-lg w-full
+            max-w-sm p-6">
+              <h2 className="text-xl font-bold mb-4">Upload Resume</h2>
+              <input onChange={(e)=>setTitle(e.target.value)}
+               value={title} type="text" placeholder="Enter resume title"  className="w-full px-4
+               py-2 mb-4 focus:border-blue-600 ring-blue-600 " required/>
+               <div>
+                <label className="block text-sm text-slate-700" htmlFor="resume-input">  
+                   
+                  Select resume file 
+                  <div className="flex flex-col items-center justify-center gap-2
+border group text-slate-400 border-slate-400 border-dashed
+rounded-md p-4 py-10 my-4
+hover:border-blue-500 hover:text-blue-700
+cursor-pointer transition-colors
+">
+  {resume ? (
+    <p>{resume.name}</p>
+  ): (
+    <>
+    <UploadCloudIcon className="size-14 stroke-1"/>
+    <p>Upload resume</p>
+    </>
+  )}
+
+                  </div>
+
+                </label>
+                <input onChange={(e)=>setResume(e.target.files[0])} type="file" id="resume-input" accept=".pdf" hidden/>
+               </div>
+               <button  className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ">Upload Resume</button>
+               <X className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 
+               cursor-pointer transition-colors" onClick={()=>{setShowUploadResume(false); setTitle("") }}/>
+            </div>
+
+          </form>
+            
+          )
+        }
 
       </div>
     </div>
