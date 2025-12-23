@@ -167,9 +167,9 @@ cursor-pointer
 
         </div>
         {showCreateResume&&(
-          <form className="fixed inset-0 bg-black-70 backdrop-blur 
+          < form onSubmit={createResume} onClick={()=>setShowCreateResume(false)} className="fixed inset-0 bg-black-70 backdrop-blur 
           bg-opacity-50 z-10 flex items-center justify-center" action="">
-            <div className="relative bg-slate-50 border shadow-md rounded-lg w-full
+            <div onClick={e=>e.stopPropagation()} className="relative bg-slate-50 border shadow-md rounded-lg w-full
             max-w-sm p-6">
               <h2 className="text-xl font-bold mb-4">Create a Resume</h2>
               <input type="text" placeholder="Enter resume title"  className="w-full px-4
@@ -179,7 +179,7 @@ cursor-pointer
                cursor-pointer transition-colors" onClick={()=>{setShowCreateResume(false); setTitle("") }}/>
             </div>
 
-          </form>
+          </>
         )}
 
       </div>
