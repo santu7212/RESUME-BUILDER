@@ -13,8 +13,11 @@ const Dashboard = () => {
   const color = ["#9333ea", "#d97706", "#dc2626", "#0284c7", "#16a34a"];
 
   const [allResume, setAllResume] = useState([]);
-  const [showCreateResume, setShowCreateResume] = useState(true);
-  const [showUploadResume, setShowUploadResume] = useState(true);
+  const [showCreateResume, setShowCreateResume] = useState(false);
+  const [showUploadResume, setShowUploadResume] = useState(false);
+  const [title, setTitle] = useState("");
+  const [resume, setResume] = useState(null);
+  const [editResumeID, setEditResumeID] = useState("");
 
   const loadAllResume = async () => {
     setAllResume(dummyResumeData);
@@ -166,13 +169,14 @@ cursor-pointer
         {showCreateResume&&(
           <form className="fixed inset-0 bg-black-70 backdrop-blur 
           bg-opacity-50 z-10 flex items-center justify-center" action="">
-            <div>
-              <h2>Create a Resume</h2>
+            <div className="relative bg-slate-50 border shadow-md rounded-lg w-full
+            max-w-sm p-6">
+              <h2 className="text-xl font-bold mb-4">Create a Resume</h2>
               <input type="text" placeholder="Enter resume title"  className="w-full px-4
                py-2 mb-4 focus:border-blue-600 ring-blue-600 " required/>
                <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ">Create Resume</button>
                <X className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 
-               cursor-pointer transition-colors" onClick={()=>{setShowCreateResume(false); }}/>
+               cursor-pointer transition-colors" onClick={()=>{setShowCreateResume(false); setTitle("") }}/>
             </div>
 
           </form>
