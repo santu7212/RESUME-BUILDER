@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { dummyResumeData } from "../assets/assets";
+import {useNavigate} from "react-router-dom"
 
 const Dashboard = () => {
   const color = ["#9333ea", "#d97706", "#dc2626", "#0284c7", "#16a34a"];
@@ -18,11 +19,19 @@ const Dashboard = () => {
   const [title, setTitle] = useState("");
   const [resume, setResume] = useState(null);
   const [editResumeID, setEditResumeID] = useState("");
+  const navigate=useNavigate()
 
   const loadAllResume = async () => {
     setAllResume(dummyResumeData);
   };
 
+  const createResume=async(event)=>{
+    event.preventDefault();
+    setShowCreateResume(false);
+    navigate(`/app/resume-builder/res123`)
+
+
+  }
   useEffect(() => {
     loadAllResume();
   }, []);
@@ -39,7 +48,7 @@ const Dashboard = () => {
 
         <div className="flex gap-4">
           {/* Create Resume */}
-          <button
+          <button onClick={()=>setShowCreateResume(true)}
             className="
               w-full sm:max-w-36 h-48
               flex flex-col items-center justify-center
@@ -167,7 +176,7 @@ cursor-pointer
 
         </div>
         {showCreateResume&&(
-          < form onSubmit={createResume} onClick={()=>setShowCreateResume(false)} className="fixed inset-0 bg-black-70 backdrop-blur 
+          <form onSubmit={createResume} onClick={()=>setShowCreateResume(false)} className="fixed inset-0 bg-black-70 backdrop-blur 
           bg-opacity-50 z-10 flex items-center justify-center" action="">
             <div onClick={e=>e.stopPropagation()} className="relative bg-slate-50 border shadow-md rounded-lg w-full
             max-w-sm p-6">
@@ -179,7 +188,7 @@ cursor-pointer
                cursor-pointer transition-colors" onClick={()=>{setShowCreateResume(false); setTitle("") }}/>
             </div>
 
-          </>
+          </form>
         )}
 
       </div>
