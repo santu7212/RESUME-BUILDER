@@ -1,4 +1,10 @@
-import { FilePenLineIcon, PlusIcon, UploadCloudIcon } from "lucide-react";
+import {
+  FilePenLineIcon,
+  PencilIcon,
+  PlusIcon,
+  Trash,
+  UploadCloudIcon,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { dummyResumeData } from "../assets/assets";
 
@@ -138,8 +144,13 @@ cursor-pointer
                   >
                     Updated on {new Date(resume.updatedAt).toLocaleDateString()}
                   </p>
-                  <div>
-                    
+                  <div className="absolute top-1 right-1 group-hover:flex items-center hidden">
+                    <Trash
+                      className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 
+                    transition-colors"
+                    />
+                    <PencilIcon className="size-7 p-1.5 hover:bg-white/50 rounded 
+                    text-slate-700 transition-colors"/>
                   </div>
                 </button>
               );
