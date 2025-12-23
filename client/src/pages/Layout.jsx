@@ -1,17 +1,16 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-  
+import React from "react";
+import { NavLink, Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Layout = () => {
   return (
     <div>
-       <Navbar/>
-        <Outlet/>
-        
-      
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <Outlet />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

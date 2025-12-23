@@ -1,13 +1,15 @@
- import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const user = { name: "Santu Pramanik" };
+
+// const logOutUSer = () => {
+//   navigate("/");
+// };
 
 const Navbar = () => {
   return (
     <div className="shadow bg-white">
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-4 py-3.5 text-slate-800 transition-all">
-
         {/* LOGO */}
         <Link to="/">
           <svg
@@ -17,7 +19,13 @@ const Navbar = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="resumaiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient
+                id="resumaiGrad"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
                 <stop offset="0%" stopColor="#5B44F6" />
                 <stop offset="50%" stopColor="#4A6CF7" />
                 <stop offset="100%" stopColor="#06B6D4" />
@@ -53,7 +61,6 @@ const Navbar = () => {
           </svg>
         </Link>
 
-         
         <div className="flex items-center gap-4 text-sm">
           <p className="max-sm:hidden">
             Hi, <span className="font-medium">{user.name}</span>
@@ -63,7 +70,6 @@ const Navbar = () => {
             Logout
           </button>
         </div>
-
       </nav>
     </div>
   );
