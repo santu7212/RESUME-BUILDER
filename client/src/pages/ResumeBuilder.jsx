@@ -1,13 +1,38 @@
-import React from 'react'
-// import { Outlet } from 'react-router-dom'
-
+import React, { useEffect, useState } from "react";
+import { Link,   } from "react-router-dom";
+import { dummyResumeData } from "../assets/assets";
 const ResumeBuilder = () => {
-  return (
-    <div>
-        ResumeBuilde
-    {/* <Outlet/> */}
-    </div>
-  )
-}
+  const { resumeID } = useParams();
+  const [resumeData, setResumeDat] = useState({
+    _id: "",
+    title: "",
+    personal_info: {},
+    professional_summary: "",
+    experiencee: [],
+    education: [],
+    project: [],
+    skills: [],
+    template: "classic",
+    accent_color: "#3B82F6",
+    public: false,
+  });
 
-export default ResumeBuilder
+  const loadExistingResume = async () => {
+    const resume = dummyResumeData.find((resume) => resume._id === resumeID);
+    if (resume) {
+      setResumeDat(resume);
+      document.title = resume.title;
+    }
+  };
+  useEffect(() => {
+    loadExistingResume();
+  }, []);
+
+  return <div>
+    <div>
+      <Link></Link>
+    </div>
+  </div>;
+};
+
+export default ResumeBuilder;
