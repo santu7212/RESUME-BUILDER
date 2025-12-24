@@ -122,7 +122,7 @@ const ResumeBuilder = () => {
                     }
                     removeBackground={removeBackground}
                     setRemoveBackground={setRemoveBackground}
-                    
+
                   />
                 )}
               </div>
@@ -130,6 +130,13 @@ const ResumeBuilder = () => {
           </div>
 
           {/* Right pannel-previw */}
+          <div className="lg:col-span-7 max-lg:mt-6">
+            <div>
+              {/* __buttons */}
+            </div>
+            {/* Resume preview */}
+             
+          </div>
         </div>
       </div>
     </div>
