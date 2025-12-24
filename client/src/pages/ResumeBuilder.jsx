@@ -15,6 +15,7 @@ import {
 import PersonalInfoForm from "../components/PersonalInfoForm";
 import ResumePreview from "../components/ResumePreview";
 import TemplateSelector from "../components/TemplateSelector";
+import ColorPicker from "../components/ColorPicker";
 const ResumeBuilder = () => {
   const { resumeID } = useParams();
   const [resumeData, setResumeDat] = useState({
@@ -84,6 +85,8 @@ const ResumeBuilder = () => {
               <div className="flex justify-between items-center mb-6 border-b border-gray-300 py-1">
                 <div className="flex  items-center gap-2">
                   <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=>setResumeDat(prev=>({...prev ,template}))}/>
+                    <ColorPicker selectedColor={resumeData.accent_color} 
+                    onChange={(color)=>setResumeDat(prev=>({...prev,accent_color:color}))}/>
                 </div>
                 <div className="flex items-center">
                   {activeSectionIndex !== 0 && (
