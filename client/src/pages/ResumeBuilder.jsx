@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams,   } from "react-router-dom";
 import { dummyResumeData } from "../assets/assets";
-import {ArrowLeftIcon, Briefcase, ChevronLeft, FileText, FolderIcon, GraduationCap, Sparkle, User} from "lucide-react"
+import {ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkle, User} from "lucide-react"
 const ResumeBuilder = () => {
   const { resumeID } = useParams();
   const [resumeData, setResumeDat] = useState({
@@ -86,7 +86,7 @@ const activeSection=section[activeSectionIndex]
             <div className="space-y-6">
               {activeSection.id==="personal" &&(
                 <div>
-                  
+
                 </div>
               )}
 
