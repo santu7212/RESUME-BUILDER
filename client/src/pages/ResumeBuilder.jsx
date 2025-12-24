@@ -18,7 +18,7 @@ import TemplateSelector from "../components/TemplateSelector";
 import ColorPicker from "../components/ColorPicker";
 const ResumeBuilder = () => {
   const { resumeID } = useParams();
-  const [resumeData, setResumeDat] = useState({
+  const [resumeData, setResumeData] = useState({
     _id: "",
     title: "",
     personal_info: {},
@@ -35,7 +35,7 @@ const ResumeBuilder = () => {
   const loadExistingResume = async () => {
     const resume = dummyResumeData.find((resume) => resume._id === resumeID);
     if (resume) {
-      setResumeDat(resume);
+      setResumeData(resume);
       document.title = resume.title;
     }
   };
@@ -84,9 +84,9 @@ const ResumeBuilder = () => {
               {/* section navigation */}
               <div className="flex justify-between items-center mb-6 border-b border-gray-300 py-1">
                 <div className="flex  items-center gap-2">
-                  <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=>setResumeDat(prev=>({...prev ,template}))}/>
+                  <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=>setResumeData(prev=>({...prev ,template}))}/>
                     <ColorPicker selectedColor={resumeData.accent_color} 
-                    onChange={(color)=>setResumeDat(prev=>({...prev,accent_color:color}))}/>
+                    onChange={(color)=>setResumeData(prev=>({...prev,accent_color:color}))}/>
                 </div>
                 <div className="flex items-center">
                   {activeSectionIndex !== 0 && (
@@ -125,7 +125,7 @@ const ResumeBuilder = () => {
                   <PersonalInfoForm
                     data={resumeData.personal_info}
                     onChange={(data) =>
-                      setResumeDat((prev) => ({ ...prev, personal_info: data }))
+                      setResumeData((prev) => ({ ...prev, personal_info: data }))
                     }
                     removeBackground={removeBackground}
                     setRemoveBackground={setRemoveBackground}
