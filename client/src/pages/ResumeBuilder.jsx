@@ -70,7 +70,7 @@ const ResumeBuilder = () => {
   }
   const handleShare=()=>{
     const frontendUrl=window.location.href.split("/app/")[0]
-    const resumeUrl=frontendUrl+"/view" + resumeID
+    const resumeUrl=frontendUrl+"/view/" + resumeID
     if(navigator.share){
       navigator.share({url:resumeUrl,text:"My Resume"})
     }else{
