@@ -61,7 +61,7 @@ const ProjectForm = ({data,onChange}) => {
                 </button>
 
               </div>
-              <div className='grid md:grid-cols-2 gap-3'>
+              <div className='grid  gap-3'>
                 <input onChange={(e)=>updateProject(index,"name",e.target.value)}
                  value={project.name || ""}
                 type="text" placeholder='Project Name '
