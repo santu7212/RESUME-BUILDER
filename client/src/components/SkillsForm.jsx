@@ -5,13 +5,13 @@ const SkillsForm = ({ data, onChange }) => {
   const [newSkill, setNewSkill] = useState("");
   const addSkill = () => {
     if (newSkill.trim && !data.includes(newSkill.trim)) {
-      onchange([...data, newSkill.trim()]);
+      onChange([...data, newSkill.trim()]);
       setNewSkill("");
     }
   };
 
   const removeSkill = (indexToRemove) => {
-    onchange(data.filter((_, index) => index !== indexToRemove));
+    onChange(data.filter((_, index) => index !== indexToRemove));
   };
 
   const handleKeyPress = (e) => {
@@ -50,7 +50,7 @@ const SkillsForm = ({ data, onChange }) => {
              hover:bg-blue-700 transition-colors
              disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Plus size={4} /> Add
+          <Plus size={18} /> Add
         </button>
       </div>
       {data.length > 0 ? (
