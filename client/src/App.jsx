@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "preview:resumeID", element: <Preview /> },
+  { path: "view/:resumeID", element: <Preview /> },
   { path: "login", element: <Login /> },
 ]);
 
