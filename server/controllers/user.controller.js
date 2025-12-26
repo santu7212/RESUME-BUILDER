@@ -98,4 +98,4 @@ const getUser = async (req, res) => {
       .json({ success: false, message: "Internal server error" });
   }
 };
-export { registerUser, loginUser,getUser };
+export { registerUser, loginUser, getUser };
