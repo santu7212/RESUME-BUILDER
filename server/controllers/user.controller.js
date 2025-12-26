@@ -44,6 +44,7 @@ const registerUser = async (req, res) => {
     });
   }
 };
+
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,9 +60,15 @@ const loginUser = async (req, res) => {
         .status(400)
         .json("User with this email does not exist!! Register first");
     }
-    if (!user.comparePassword(password)) {
-      return res.status(400).json("Invalid password or email");
+    const isMatchPassword = await user.comparePassword(password);
+    if (!isMatchPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
     }
+
+ 
     const token = generateToken(user._id);
     user.password = undefined;
     return res
