@@ -68,7 +68,6 @@ const loginUser = async (req, res) => {
       });
     }
 
- 
     const token = generateToken(user._id);
     user.password = undefined;
     return res
@@ -81,4 +80,22 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const getUser = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+
+    user.password = undefined;
+    return res.status(200).json({ user });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+};
+export { registerUser, loginUser,getUser };

@@ -23,5 +23,5 @@ UserSchema.methods.comparePassword = async function (password) {
 // Prevent model overwrite error
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
-const User = mongoose.model("User", UserSchema);
+// const User = mongoose.model("User", UserSchema);
 export default User;
