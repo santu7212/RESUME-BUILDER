@@ -1,4 +1,12 @@
 import User from "../models/user.model.js";
+import jwt from "jsonwebtoken";
+
+const generateToken = (userId) => {
+  const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+  return token;
+};
 
 const registerUser = async (req, res) => {
   try {
@@ -18,12 +26,14 @@ const registerUser = async (req, res) => {
       email,
       password,
     });
+    const token =generateToken(user._id)
 
     user.password = undefined;
 
     return res.status(201).json({
       success: true,
       message: "User registered successfully",
+      token,
       user,
     });
   } catch (error) {
