@@ -19,7 +19,7 @@ const registerUser = async (req, res) => {
       password,
     });
 
-    user.passsword = undefined;
+    user.password = undefined;
 
     return res.status(201).json({
       success: true,
