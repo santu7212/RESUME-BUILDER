@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import connectDB from "./config/db.js";
 import userRouter from "./routes/user.router.js";
+import resumeRouter from "./routes/resume.router.js";
 
 const app = express();
 
@@ -13,5 +14,6 @@ await connectDB();
 app.use(express.json());
 app.use(cors());
 app.get("/", (req, res) => res.send("Server is live..."));
-app.use("/api/user",userRouter)
+app.use("/api/user", userRouter);
+app.use("/api/resume", resumeRouter);
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
