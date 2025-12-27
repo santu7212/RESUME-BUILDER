@@ -15,4 +15,17 @@ const createResume = async (req, res) => {
   }
 };
 
-export {createResume}
+const deleteResume = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { resumeID } = req.params;
+
+    // create new resume
+    await Resume.findOneAndDelete({ userId, _id: resumeID });
+    return res.status(200).json({ message: "Resume deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export { createResume, deleteResume };
