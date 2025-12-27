@@ -1,4 +1,6 @@
+import imagekit from "../config/imagekit.js";
 import Resume from "../models/resume.model.js";
+import fs from "fs";
 
 const createResume = async (req, res) => {
   try {
@@ -68,9 +70,24 @@ const updateResume = async (req, res) => {
     const userId = req.userId;
     const { resumeID, resumeData, removeBackground } = req.body;
     const image = req.file;
-    
 
     let resumeDataCopy = JSON.parse(resumeData);
+    if (image) {
+      const imageBufferData = fs.createReadStream(image.path);
+      const response = await imagekit.files.upload({
+        file: imageBufferData,
+        fileName: "resume.png",
+        folder: "user-resumes",
+        transformation: {
+          pre:
+            "w-300, h-300,fo-face,z-0.75" +
+            (removeBackground ? ",e-bgremove" : ""),
+        },
+      });
+
+      resumeDataCopy.personal_info.image = response.url;
+    }
+
     const resume = await Resume.findOneAndUpdate(
       { userId, _id: resumeID },
       resumeDataCopy,
@@ -85,4 +102,10 @@ const updateResume = async (req, res) => {
   }
 };
 
-export { createResume, deleteResume, getResumeById, getPublicResumeById,updateResume };
+export {
+  createResume,
+  deleteResume,
+  getResumeById,
+  getPublicResumeById,
+  updateResume,
+};
