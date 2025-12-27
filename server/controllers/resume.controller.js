@@ -63,4 +63,25 @@ const getPublicResumeById = async (req, res) => {
   }
 };
 
-export { createResume, deleteResume, getResumeById, getPublicResumeById };
+const updateResume = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { resumeID, resumeData, removeBackground } = req.body;
+    const image = req.file;
+
+    let resumeDataCopy = JSON.parse(resumeData);
+    const resume = await Resume.findOneAndUpdate(
+      { userId, _id: resumeID },
+      resumeDataCopy,
+      {
+        new: true,
+      }
+    );
+
+    return res.status(200).json({ message: "saved successfully", resume });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export { createResume, deleteResume, getResumeById, getPublicResumeById,updateResume };
