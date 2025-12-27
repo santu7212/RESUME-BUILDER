@@ -20,7 +20,7 @@ const deleteResume = async (req, res) => {
     const userId = req.userId;
     const { resumeID } = req.params;
 
-    // create new resume
+    // delete resume
     await Resume.findOneAndDelete({ userId, _id: resumeID });
     return res.status(200).json({ message: "Resume deleted successfully" });
   } catch (error) {
@@ -28,4 +28,23 @@ const deleteResume = async (req, res) => {
   }
 };
 
-export { createResume, deleteResume };
+const getResumeById = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { resumeID } = req.params;
+
+    // get resume
+    const resume = await Resume.findOne({ userId, _id: resumeID });
+    if (!resume) {
+      return res.status(400).json({ message: "Resume not found" });
+    }
+    resume._V = undefined;
+    resume.createdAt = undefined;
+    resume.updatedAt = undefined;
+    return res.status(200).json({ resume });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export { createResume, deleteResume,getResumeById };
