@@ -47,4 +47,20 @@ const getResumeById = async (req, res) => {
   }
 };
 
-export { createResume, deleteResume,getResumeById };
+const getPublicResumeById = async (req, res) => {
+  try {
+    const { resumeID } = req.params;
+
+    // get resume only public
+    const resume = await Resume.findOne({ public: true, _id: resumeID });
+    if (!resume) {
+      return res.status(400).json({ message: "Resume not found" });
+    }
+
+    return res.status(200).json({ resume });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export { createResume, deleteResume, getResumeById, getPublicResumeById };
