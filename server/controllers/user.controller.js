@@ -1,3 +1,4 @@
+import Resume from "../models/resume.model.js";
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
@@ -12,7 +13,9 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
-      return res.status(400).json({ success: false, message: "Missing fields" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing fields" });
     }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -98,4 +101,22 @@ const getUser = async (req, res) => {
       .json({ success: false, message: "Internal server error" });
   }
 };
-export { registerUser, loginUser, getUser };
+
+const getUserResume = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const resumes = await Resume.find({ userId });
+    if (!resumes) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Resume not found" });
+    }
+
+    return res.status(200).json({ resumes });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+};
+export { registerUser, loginUser, getUser, getUserResume };
