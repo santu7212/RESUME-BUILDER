@@ -68,6 +68,7 @@ const updateResume = async (req, res) => {
     const userId = req.userId;
     const { resumeID, resumeData, removeBackground } = req.body;
     const image = req.file;
+    
 
     let resumeDataCopy = JSON.parse(resumeData);
     const resume = await Resume.findOneAndUpdate(
