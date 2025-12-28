@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "view/:resumeID", element: <Preview /> },
-  { path: "login", element: <Login /> },
+ 
 ]);
 
 const App = () => {

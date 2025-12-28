@@ -1,5 +1,5 @@
 import React from "react";
-import {EyeIcon, Lock, Mail, User2Icon} from "lucide-react"
+import { Lock, Mail, User2Icon} from "lucide-react"
 
 const Login = () => {
 
