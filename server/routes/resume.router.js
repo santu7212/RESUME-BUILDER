@@ -17,7 +17,7 @@ resumeRouter.put(
   protect,
   updateResume
 );
-resumeRouter.delete("/delete-resume/:", protect, deleteResume);
+resumeRouter.delete("/delete-resume/:resumeID", protect, deleteResume);
 resumeRouter.get("/get-resume/:resumeID", protect, getResumeById);
 resumeRouter.get("/public/:resumeID", getPublicResumeById);
 
