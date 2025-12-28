@@ -3,6 +3,7 @@ import { Lock, Mail, User2Icon } from "lucide-react";
 import api from "../configs/api";
 import { useDispatch } from "react-redux";
 import { login } from "../app/features/authSlice.js";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,8 +24,10 @@ const Login = () => {
       const { data } = await api.post(`/api/user/${state}`, formData);
       dispatch(login(data));
       localStorage.setItem("token", data.token);
+      toast.success(data.message)
     } catch (error) {
-      
+      toast(error?.response?.data?.message || error.message)
+
     }
   };
 
