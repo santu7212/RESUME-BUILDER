@@ -1,11 +1,15 @@
 import React from "react";
-import { Lock, Mail, User2Icon} from "lucide-react"
+import { Lock, Mail, User2Icon } from "lucide-react";
+import api from "../configs/api";
+import { useDispatch } from "react-redux";
+import { login } from "../app/features/authSlice.js";
 
 const Login = () => {
+  const dispatch = useDispatch();
 
-  const query = new URLSearchParams(window.location.search)
-  const urlState=query.get("state")
-  const [state, setState] = React.useState( urlState ||"login");
+  const query = new URLSearchParams(window.location.search);
+  const urlState = query.get("state");
+  const [state, setState] = React.useState(urlState || "login");
 
   const [formData, setFormData] = React.useState({
     name: "",
@@ -15,6 +19,13 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { data } = await api.post(`/api/user/${state}`, formData);
+      dispatch(login(data));
+      localStorage.setItem("token", data.token);
+    } catch (error) {
+      
+    }
   };
 
   const handleChange = (e) => {
@@ -35,7 +46,7 @@ const Login = () => {
         </p>
         {state !== "login" && (
           <div className="flex items-center mt-6 w-full bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
-          <User2Icon size={16} color="blue"/>
+            <User2Icon size={16} color="blue" />
             <input
               type="text"
               name="name"
@@ -48,7 +59,7 @@ const Login = () => {
           </div>
         )}
         <div className="flex items-center w-full mt-4 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
-         <Mail size={15} color="blue"/>
+          <Mail size={15} color="blue" />
           <input
             type="email"
             name="email"
@@ -60,8 +71,8 @@ const Login = () => {
           />
         </div>
         <div className="flex items-center mt-4 w-full bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
-        <Lock size={14} color="blue"/>
-           
+          <Lock size={14} color="blue" />
+
           <input
             type="password"
             name="password"

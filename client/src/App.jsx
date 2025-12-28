@@ -9,6 +9,7 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import { useDispatch } from "react-redux";
 import api from "./configs/api.js";
 import { login, setLoading } from "./app/features/authSlice.js";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,12 @@ const App = () => {
   useEffect(() => {
     getUserData();
   }, []);
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Toaster />
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;
