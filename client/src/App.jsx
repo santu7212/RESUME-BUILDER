@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./pages/Layout";
 import Preview from "./pages/Preview";
 import ResumeBuilder from "./pages/ResumeBuilder";
+import { useDispatch } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,18 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const dispatch=useDispatch()
+  const getUserData=async()=>{
+    const token=localStorage.getItem("token")
+    try {
+      if(token){
+        const {data}=await 
+      }
+      
+    } catch (error) {
+      
+    }
+  }
   return <RouterProvider router={router} />;
 };
 
