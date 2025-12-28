@@ -1,5 +1,6 @@
 import {
   FilePenLineIcon,
+  LoaderCircleIcon,
   PencilIcon,
   PlusIcon,
   Trash,
@@ -83,10 +84,22 @@ const Dashboard = () => {
   const editTitle = async (event) => {
     event.preventDefault();
   };
+
   const deleteResume = async (resumeID) => {
-    const confirm = window.confirm("Are you sure you want to delete?");
-    if (confirm) {
-      setAllResume((prev) => prev.filter((resume) => resume._id !== resumeID));
+    try {
+      const confirm = window.confirm("Are you sure you want to delete?");
+      if (confirm) {
+        const { data } = await api.delete(
+          `/api/resume/delete-resume/${resumeID}`,
+          { headers: { Authorization: token} }
+        );
+
+        // setAllResume((prev) => prev.filter((resume) => resume._id !== resumeID));
+        setAllResume(allResume.filter((resume) => resume._id !== resumeID));
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
 
@@ -336,6 +349,10 @@ cursor-pointer transition-colors
                 />
               </div>
               <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ">
+                {isLoading && (
+                  <LoaderCircleIcon className="animate-spin size-4 text-white" />
+                )}
+                {isLoading ? "Uploading..." : "Upload Resume"}
                 Upload Resume
               </button>
               <X
