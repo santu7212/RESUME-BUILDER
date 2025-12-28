@@ -30,7 +30,15 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const loadAllResume = async () => {
-    setAllResume(dummyResumeData);
+    try {
+      const { data } = await api.get("/api/user/resume", {
+        headers: { Authorization: token },
+      });
+
+      setAllResume(data.resumes);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
+    }
   };
 
   const createResume = async (event) => {
@@ -39,8 +47,8 @@ const Dashboard = () => {
     try {
       event.preventDefault();
       const { data } = await api.post(
-        "/api/resume/create-resume",
-        { title },
+        "/api/ai/upload-resume",
+        { title, resumeText },
         { headers: { Authorization: token } }
       );
       setAllResume([...allResume, data.resume]);
@@ -54,7 +62,7 @@ const Dashboard = () => {
   const uploadResume = async (event) => {
     // setShowUploadResume(false);
     // navigate(`/app/resume-builder/res123`);
-    
+
     event.preventDefault();
     setIsLoading(true);
     try {
@@ -64,14 +72,13 @@ const Dashboard = () => {
         { title, resumeText },
         { headers: { Authorization: token } }
       );
-      setResume(null)
-      setShowUploadResume(false)
-      navigate(`/app/resume-builder/${data.resumeID}`)
+      setResume(null);
+      setShowUploadResume(false);
+      navigate(`/app/resume-builder/${data.resumeID}`);
     } catch (error) {
       toast.error(error?.response?.data?.message || error.message);
-      
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
   const editTitle = async (event) => {
     event.preventDefault();
@@ -82,6 +89,7 @@ const Dashboard = () => {
       setAllResume((prev) => prev.filter((resume) => resume._id !== resumeID));
     }
   };
+
   useEffect(() => {
     loadAllResume();
   }, []);
