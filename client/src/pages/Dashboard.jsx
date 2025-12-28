@@ -49,7 +49,7 @@ const Dashboard = () => {
       event.preventDefault();
       const { data } = await api.post(
         "/api/ai/upload-resume",
-        { title, resumeText },
+        { title },
         { headers: { Authorization: token } }
       );
       setAllResume([...allResume, data.resume]);
