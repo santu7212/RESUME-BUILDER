@@ -10,8 +10,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { dummyResumeData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import api from "../configs/api";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
+  const { user, token } = useSelector((state) => state.auth);
+
   const color = ["#9333ea", "#d97706", "#dc2626", "#0284c7", "#16a34a"];
 
   const [allResume, setAllResume] = useState([]);
@@ -27,26 +32,37 @@ const Dashboard = () => {
   };
 
   const createResume = async (event) => {
-    event.preventDefault();
-    setShowCreateResume(false);
-    navigate(`/app/resume-builder/res123`);
+    // setShowCreateResume(false);
+    // navigate(`/app/resume-builder/res123`);
+    try {
+      event.preventDefault();
+      const { data } = await api.post(
+        "/api/resume/create-resume",
+        { title },
+        { headers: { Authorization: token } }
+      );
+      setAllResume([...allResume, data.resume]);
+      setTitle("");
+      setShowCreateResume(false);
+      navigate(`/app/resume-builder/${data.resume._id}`);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
+    }
   };
   const uploadResume = async (event) => {
     event.preventDefault();
     setShowUploadResume(false);
     navigate(`/app/resume-builder/res123`);
   };
-  const editTitle=async(event)=>{
+  const editTitle = async (event) => {
     event.preventDefault();
-
-  }
-  const deleteResume=async(resumeID)=>{
-    const confirm=window.confirm("Are you sure you want to delete?")
-    if(confirm){
-      setAllResume(prev=>prev.filter(resume=>resume._id !==resumeID))
+  };
+  const deleteResume = async (resumeID) => {
+    const confirm = window.confirm("Are you sure you want to delete?");
+    if (confirm) {
+      setAllResume((prev) => prev.filter((resume) => resume._id !== resumeID));
     }
-
-  }
+  };
   useEffect(() => {
     loadAllResume();
   }, []);
@@ -135,7 +151,7 @@ const Dashboard = () => {
               const baseColor = color[index % color.length];
               return (
                 <button
-                onClick={()=>navigate(`/app/resume-builder/${resume._id}`)}
+                  onClick={() => navigate(`/app/resume-builder/${resume._id}`)}
                   key={index}
                   className="relative
 w-full
@@ -177,12 +193,20 @@ cursor-pointer
                   >
                     Updated on {new Date(resume.updatedAt).toLocaleDateString()}
                   </p>
-                  <div onClick={e=>e.stopPropagation()} className="absolute top-1 right-1 group-hover:flex items-center hidden">
-                    <Trash onClick={()=>deleteResume(resume._id)}
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute top-1 right-1 group-hover:flex items-center hidden"
+                  >
+                    <Trash
+                      onClick={() => deleteResume(resume._id)}
                       className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 
                     transition-colors"
                     />
-                    <PencilIcon onClick={()=>{setEditResumeID(resume._id); setTitle(resume.title)}}
+                    <PencilIcon
+                      onClick={() => {
+                        setEditResumeID(resume._id);
+                        setTitle(resume.title);
+                      }}
                       className="size-7 p-1.5 hover:bg-white/50 rounded 
                     text-slate-700 transition-colors"
                     />
@@ -299,7 +323,7 @@ cursor-pointer transition-colors
           </form>
         )}
 
-         {editResumeID&& (
+        {editResumeID && (
           <form
             onSubmit={editTitle}
             onClick={() => setEditResumeID("")}
