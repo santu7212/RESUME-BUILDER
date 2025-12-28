@@ -71,7 +71,7 @@ const updateResume = async (req, res) => {
     const { resumeID, resumeData, removeBackground } = req.body;
     const image = req.file;
 
-    let resumeDataCopy = JSON.parse(resumeData);
+    let resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
     if (image) {
       const imageBufferData = fs.createReadStream(image.path);
       const response = await imagekit.files.upload({

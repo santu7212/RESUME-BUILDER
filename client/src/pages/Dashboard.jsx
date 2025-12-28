@@ -81,9 +81,61 @@ const Dashboard = () => {
     }
     setIsLoading(false);
   };
+
+
+  // const editTitle = async (event) => {
+  //   try {
+  //     event.preventDefault();
+  //     const { data } = await api.put(
+  //       `api/resume/edit-resume${editResumeID}`,
+  //       { resumeID: editResumeID, resumeData: { title } },
+  //       { headers: { Authorization: token } }
+  //     );
+  //     setAllResume(
+  //       allResume.map((resume) =>
+  //         resume._id === editResumeID ? { ...resume, title } : resume
+  //       )
+  //     );
+  //     setTitle("");
+  //     setEditResumeID("");
+  //     toast.success(data.message);
+  //   } catch (error) {
+  //      toast.error(error?.response?.data?.message || error.message);
+
+  //   }
+  // };
+
   const editTitle = async (event) => {
-    event.preventDefault();
-  };
+  event.preventDefault();
+
+  try {
+    const { data } = await api.put(
+      `/api/resume/edit-resume/${editResumeID}`,
+      {
+        resumeID: editResumeID,
+        resumeData:{title}, 
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    setAllResume((prev) =>
+      prev.map((resume) =>
+        resume._id === editResumeID ? { ...resume, title } : resume
+      )
+    );
+
+    setTitle("");
+    setEditResumeID("");
+    toast.success(data.message);
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error.message);
+  }
+};
+
 
   const deleteResume = async (resumeID) => {
     try {
@@ -91,7 +143,7 @@ const Dashboard = () => {
       if (confirm) {
         const { data } = await api.delete(
           `/api/resume/delete-resume/${resumeID}`,
-          { headers: { Authorization: token} }
+          { headers: { Authorization: token } }
         );
 
         // setAllResume((prev) => prev.filter((resume) => resume._id !== resumeID));
