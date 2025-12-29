@@ -366,12 +366,12 @@ cursor-pointer transition-colors
                   hidden
                 />
               </div>
-              <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ">
+              <button disabled={isLoading} className="flex-item-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ">
                 {isLoading && (
                   <LoaderCircleIcon className="animate-spin size-4 text-white" />
                 )}
                 {isLoading ? "Uploading..." : "Upload Resume"}
-                Upload Resume
+                
               </button>
               <X
                 className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 
