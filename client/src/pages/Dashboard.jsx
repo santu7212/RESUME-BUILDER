@@ -48,7 +48,7 @@ const Dashboard = () => {
     try {
       event.preventDefault();
       const { data } = await api.post(
-        "/api/ai/upload-resume",
+        "/api/resume/create-resume",
         { title },
         { headers: { Authorization: token } }
       );
