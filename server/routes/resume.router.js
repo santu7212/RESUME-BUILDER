@@ -20,6 +20,6 @@ resumeRouter.put(
 resumeRouter.delete("/delete-resume/:resumeID", protect, deleteResume);
 resumeRouter.get("/get-resume/:resumeID", protect, getResumeById);
 resumeRouter.get("/public/:resumeID", getPublicResumeById);
-resumeRouter.put("/edit-resume/:resumeID", updateResume);
+
 
 export default resumeRouter;
