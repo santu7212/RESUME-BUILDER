@@ -80,7 +80,7 @@ const uploadResume = async (req, res) => {
     const userPrompt = `extract data from this resume:${resumeText} 
     Provide data in the following JSON format with no additional text before or after:
     {
-     personal_summary: { type: String, default: "" },
+     professional_summary: { type: String, default: "" },
     skills: [{ type: String }],
     personal_info: {
       image: { type: String, default: "" },
