@@ -17,7 +17,7 @@ const ProfessionalSummary = ({ data, onChange, setResumeData }) => {
         { headers: { Authorization: token } }
       );
       console.log("Enhanced:", response.data.enhancedContent);
-// console.log("Resume data:", resumeData);
+      // console.log("Resume data:", resumeData);
 
       setResumeData((prev) => ({
         ...prev,
@@ -55,8 +55,7 @@ const ProfessionalSummary = ({ data, onChange, setResumeData }) => {
           ) : (
             <Sparkle className="size-4" />
           )}
-          {isGenerating? "Enhancing..." : "AI Enhance"}
-          
+          {isGenerating ? "Enhancing..." : "AI Enhance"}
         </button>
       </div>
       <div className="mt-6">
